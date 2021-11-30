@@ -1,4 +1,5 @@
 dependencies {
     implementation(Dependencies.kotlinStd)
-    implementation(project(":gravel-api"))
+    implementation(Dependencies.kotlinReflect)
+    api(project(":gravel-api"))
 }

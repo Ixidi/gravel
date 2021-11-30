@@ -12,6 +12,7 @@ object Dependencies {
     val kLogging = "io.github.microutils:kotlin-logging:${Versions.kLogging}"
     val snakeYaml = "org.yaml:snakeyaml:${Versions.snakeYaml}"
     val ktorNetwork = "io.ktor:ktor-network:${Versions.ktor}"
+    val ktorUtils = "io.ktor:ktor-utils:${Versions.ktor}"
     val jacksonKotlin = "com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.jackson}"
     val jacksonAnnotations = "com.fasterxml.jackson.core:jackson-annotations:${Versions.jackson}"
 

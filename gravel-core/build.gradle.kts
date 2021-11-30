@@ -9,6 +9,6 @@ dependencies {
     implementation(Dependencies.kLogging)
     implementation(Dependencies.slf4jSimple)
     implementation(Dependencies.kotlinxSerialization)
-    implementation(project(":gravel-api"))
-    implementation(project(":gravel-protocol"))
+    api(project(":gravel-api"))
+    api(project(":gravel-protocol"))
 }

@@ -29,7 +29,7 @@ data class ServerStatus(
         data class Sample(
             val name: String,
             @Serializable(with = UUIDSerializer::class)
-            val uuid: UUID
+            val uuid: UUID? = null
         )
 
     }

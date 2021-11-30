@@ -21,4 +21,5 @@ internal data class RawPacket(
         rawData = readAll()
     }
 
+    override fun toString(): String = "RawPacket(id=0x${"%X".format(id)}, state=$state)"
 }

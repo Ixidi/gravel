@@ -16,11 +16,11 @@ interface Protocol {
     fun <T : Packet> getPacketIdByClass(clazz: KClass<T>): Int?
 
     /**
-     * Creates empty packet with [clazz] class or null if such a [Packet] is not registered.
+     * Creates empty packet implementing [clazz] class or null if such a [Packet] is not registered.
      * @param clazz packet's class
      * @return [T] or null if not registered.
      */
-    fun <T : Packet> createEmptyPacketFromClass(clazz: KClass<T>): T?
+    fun <T : Packet> createEmptyPacketImplementation(clazz: KClass<T>): T?
 
     /**
      * @param state current state od the connection.

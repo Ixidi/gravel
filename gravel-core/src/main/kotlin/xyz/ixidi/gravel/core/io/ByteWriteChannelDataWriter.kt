@@ -1,8 +1,12 @@
 package xyz.ixidi.gravel.core.io
 
 import io.ktor.utils.io.ByteWriteChannel
+import io.ktor.utils.io.writeBoolean
 import io.ktor.utils.io.writeFully
+import io.ktor.utils.io.writeInt
+import xyz.ixidi.gravel.api.component.TextComponent
 import xyz.ixidi.gravel.api.io.DataWriter
+import xyz.ixidi.gravel.api.nbt.CompoundTag
 
 internal class ByteWriteChannelDataWriter(
     private val byteWriteChannel: ByteWriteChannel
@@ -30,6 +34,38 @@ internal class ByteWriteChannelDataWriter(
 
     override suspend fun writeLong(value: Long) {
         byteWriteChannel.writeLong(value)
+    }
+
+    override suspend fun writeByte(value: Byte) {
+        byteWriteChannel.writeByte(value)
+    }
+
+    override suspend fun writeInt(value: Int) {
+        byteWriteChannel.writeInt(value)
+    }
+
+    override suspend fun writeFloat(value: Float) {
+        byteWriteChannel.writeFloat(value)
+    }
+
+    override suspend fun writeDouble(value: Double) {
+        byteWriteChannel.writeDouble(value)
+    }
+
+    override suspend fun writeBoolean(value: Boolean) {
+        byteWriteChannel.writeBoolean(value)
+    }
+
+    override suspend fun writeUByte(value: UByte) {
+        byteWriteChannel.writeByte(value.toByte())
+    }
+
+    override suspend fun writeNbtCompound(value: CompoundTag) {
+        TODO()
+    }
+
+    override suspend fun writeTextComponent(value: TextComponent) {
+        TODO("Not yet implemented")
     }
 }
 
