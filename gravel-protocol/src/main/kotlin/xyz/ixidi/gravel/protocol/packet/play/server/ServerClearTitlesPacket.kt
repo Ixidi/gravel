@@ -1,4 +1,9 @@
 package xyz.ixidi.gravel.protocol.packet.play.server
 
-interface ServerClearTitlesPacket {
+import xyz.ixidi.gravel.api.packet.Packet
+
+interface ServerClearTitlesPacket : Packet {
+
+    var reset: Boolean
+
 }
