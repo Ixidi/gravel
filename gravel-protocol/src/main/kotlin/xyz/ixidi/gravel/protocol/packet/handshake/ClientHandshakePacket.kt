@@ -19,4 +19,5 @@ class ClientHandshakePacket : StandardPacket() {
     var serverPort by uShort()
     var nextState by varIntEnum(*NextState.values())
 
+    var f by varInt()
 }

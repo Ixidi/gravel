@@ -1,4 +1,7 @@
 package xyz.ixidi.gravel.api.io
 
-class Position {
-}
+data class Position(
+    val x: Int,
+    val y: Int,
+    val z: Int
+)

@@ -1,5 +1,6 @@
 package xyz.ixidi.gravel.protocol.packet.play.server
 
+import xyz.ixidi.gravel.api.io.Angle
 import xyz.ixidi.gravel.api.packet.Packet
 import java.util.UUID
 
@@ -11,8 +12,8 @@ interface ServerSpawnEntityPacket : Packet {
     var x: Double
     var y: Double
     var z: Double
-    var pitch: Float
-    var yaw: Float
+    var pitch: Angle
+    var yaw: Angle
     var data: Int
     var velocityX: Short
     var velocityY: Short

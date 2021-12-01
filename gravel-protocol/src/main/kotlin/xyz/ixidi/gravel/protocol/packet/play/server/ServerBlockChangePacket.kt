@@ -1,4 +1,11 @@
 package xyz.ixidi.gravel.protocol.packet.play.server
 
-interface ServerBlockChangePacket {
+import xyz.ixidi.gravel.api.io.Position
+import xyz.ixidi.gravel.api.packet.Packet
+
+interface ServerBlockChangePacket : Packet {
+
+    var location: Position
+    var blockId: Int
+
 }

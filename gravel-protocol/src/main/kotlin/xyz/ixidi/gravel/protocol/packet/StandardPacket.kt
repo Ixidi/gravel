@@ -3,8 +3,9 @@ package xyz.ixidi.gravel.protocol.packet
 import xyz.ixidi.gravel.api.io.DataReader
 import xyz.ixidi.gravel.api.io.DataWriter
 import xyz.ixidi.gravel.api.packet.Packet
-import xyz.ixidi.gravel.protocol.misc.PositionData
-import java.util.UUID
+import xyz.ixidi.gravel.protocol.packet.play.server.ServerJoinGamePacket
+import kotlin.reflect.KMutableProperty1
+import kotlin.reflect.KProperty1
 
 abstract class StandardPacket : Packet {
 
@@ -16,19 +17,34 @@ abstract class StandardPacket : Packet {
         return field
     }
 
-    protected fun varInt() = field(
-        read = { readVarInt() },
-        write = { writeVarInt(it) }
+    protected fun <T> list(read: suspend DataReader.() -> T, write: suspend DataWriter.(T) -> Unit) = field(
+        read = {
+            val length = readVarInt()
+            val list = ArrayList<T>()
+            repeat(length) {
+                list.add(read())
+            }
+            list.toList()
+        },
+        write = {
+            writeVarInt(it.size)
+            it.forEach { f -> write(f) }
+        }
     )
 
-    protected fun int() = field(
-        read = { readInt() },
-        write = { writeInt(it) }
+    protected fun boolean() = field(
+        read = { readBoolean() },
+        write = { writeBoolean(it) }
     )
 
     protected fun byte() = field(
         read = { readByte() },
         write = { writeByte(it) }
+    )
+
+    protected fun uByte() = field(
+        read = { readUByte() },
+        write = { writeUByte(it) }
     )
 
     protected fun short() = field(
@@ -41,14 +57,9 @@ abstract class StandardPacket : Packet {
         write = { writeUShort(it) }
     )
 
-    protected fun uByte() = field(
-        read = { readUByte() },
-        write = { writeUByte(it) }
-    )
-
-    protected fun boolean() = field(
-        read = { readBoolean() },
-        write = { writeBoolean(it) }
+    protected fun int() = field(
+        read = { readInt() },
+        write = { writeInt(it) }
     )
 
     protected fun long() = field(
@@ -56,19 +67,14 @@ abstract class StandardPacket : Packet {
         write = { writeLong(it) }
     )
 
-    protected fun double() = field(
-        read = { readDouble() },
-        write = { writeDouble(it) }
-    )
-
     protected fun float() = field(
         read = { readFloat() },
         write = { writeFloat(it) }
     )
 
-    protected fun uuid() = field(
-        read = { UUID(readLong(), readLong()) },
-        write = { writeLong(it.mostSignificantBits); writeLong(it.leastSignificantBits) }
+    protected fun double() = field(
+        read = { readDouble() },
+        write = { writeDouble(it) }
     )
 
     protected fun string() = field(
@@ -81,14 +87,41 @@ abstract class StandardPacket : Packet {
         write = { writeString(it) }
     )
 
-    protected fun nbtCompound() = field(
-        read = { readNbtCompound(true) },
-        write = { writeNbtCompound(it) }
-    )
-
     protected fun textComponent(maxJsonLength: Int) = field(
         read = { readTextComponent(maxJsonLength) },
         write = { writeTextComponent(it) }
+    )
+
+    protected fun varInt() = field(
+        read = { readVarInt() },
+        write = { writeVarInt(it) }
+    )
+
+    protected fun varLong() = field(
+        read = { readVarLong() },
+        write = { writeVarLong(it) }
+    )
+
+    ///protected fun slot() = TODO()
+
+    protected fun nbtCompound() = field(
+        read = { readNbtCompound() },
+        write = { writeNbtCompound(it) }
+    )
+
+    protected fun position() = field(
+        read = { readPosition() },
+        write = { writePosition(it) }
+    )
+
+    protected fun angle() = field(
+        read = { readAngle() },
+        write = { writeAngle(it) }
+    )
+
+    protected fun uuid() = field(
+        read = { readUUID() },
+        write = { writeUUID(it) }
     )
 
     protected fun <T : VarIntEnum> varIntEnum(vararg values: T) = field(
@@ -102,35 +135,9 @@ abstract class StandardPacket : Packet {
         }
     )
 
-    protected fun position() = field(
-        read = {
-            val long = readLong()
-            val x = long shr 38
-            val y = long and 0xFFF
-            val z = long shl 26 shr 38
-
-            PositionData(x.toInt(), y.toInt(), z.toInt())
-        },
-        write = {
-            val long = ((it.x.toLong() and 0x3FFFFFF) shl 38) or ((it.z.toLong() and 0x3FFFFFF) shl 12) or (it.y.toLong() and 0xFFF)
-            writeLong(long)
-        }
-    )
-
-    //TODO
-    protected fun stringList() = field(
-        read = {
-            val length = readVarInt()
-            val list = ArrayList<String>()
-            repeat(length) {
-                list.add(readString())
-            }
-            list.toList()
-        },
-        write = {
-            writeVarInt(it.size)
-            it.forEach { x -> writeString(x) }
-        }
+    protected inline fun <reified E : Enum<E>, T> Field<T>.enum(correspondingProperty: KMutableProperty1<E, T>): Field<E> = mapped(
+        convertFrom = { correspondingProperty(it) },
+        convertTo = { enumValues<E>().first { e -> correspondingProperty(e) == it } }
     )
 
     final override suspend fun DataWriter.write() {
