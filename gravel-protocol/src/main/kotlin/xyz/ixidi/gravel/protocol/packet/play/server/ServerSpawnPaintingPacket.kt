@@ -6,6 +6,35 @@ import java.util.UUID
 
 interface ServerSpawnPaintingPacket : Packet {
 
+    enum class Motive {
+        KEBAB,
+        AZTEC,
+        ALBAN,
+        AZTEC_2,
+        BOMB,
+        PLANT,
+        WASTELAND,
+        POOL,
+        COUR_BET,
+        SEA,
+        SUNSET,
+        CREE_BET,
+        WANDERER,
+        GRAHAM,
+        MATCH,
+        BUST,
+        STAGE,
+        VOID,
+        SKULL_AND_ROSES,
+        WITHER,
+        FIGHTERS,
+        POINTER,
+        PIG_SCENE,
+        BURNING_SKULL,
+        SKELETON,
+        DONKEY_KONG
+    }
+
     enum class Direction {
         NORTH,
         SOUTH,
@@ -15,7 +44,7 @@ interface ServerSpawnPaintingPacket : Packet {
 
     var entityId: Int
     var entityUUID: UUID
-    val motive: Int
+    val motive: Motive
     val location: Position
     val direction: Direction
 

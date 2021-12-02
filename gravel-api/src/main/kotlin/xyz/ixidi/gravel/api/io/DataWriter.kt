@@ -20,6 +20,7 @@ interface DataWriter {
     suspend fun writeDouble(value: Double)
     suspend fun writeString(value: String)
     suspend fun writeTextComponent(value: TextComponent)
+    suspend fun writeIdentifier(value: Identifier)
     suspend fun writeVarInt(value: Int)
     suspend fun writeVarLong(value: Long)
     //suspend fun writeEntityMetadata() TODO

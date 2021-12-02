@@ -9,7 +9,11 @@ interface ServerPlayerPositionAndLookPacket : Packet {
     var z: Double
     var yaw: Float
     var pitch: Float
-    var flags: Byte
+    var flagX: Boolean
+    var flagY: Boolean
+    var flagZ: Boolean
+    var flagYRot: Boolean
+    var flagXRot: Boolean
     var teleportId: Int
     var dismountVehicle: Boolean
 

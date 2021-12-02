@@ -3,11 +3,11 @@ package xyz.ixidi.gravel.protocol.packet.play.server
 import xyz.ixidi.gravel.api.io.SlotData
 import xyz.ixidi.gravel.api.packet.Packet
 
-interface ServerSetSlotPacket : Packet {
+interface ServerWindowItemsPacket : Packet {
 
-    var windowId: Byte
+    var windowId: UByte
     var stateId: Int
-    var slot: Short
-    var slotData: SlotData
+    var slots: List<SlotData>
+    var carriedItem: SlotData
 
 }

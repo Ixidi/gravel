@@ -31,7 +31,9 @@ interface ServerBossBarPacket : Packet {
             val health: Float,
             val color: Color,
             val division: Dividers,
-            val flags: UByte
+            val shouldDarkenSky: Boolean,
+            val isDragonBar: Boolean,
+            var createFog: Boolean
         ) : Action()
 
         object Remove : Action()
@@ -50,7 +52,9 @@ interface ServerBossBarPacket : Packet {
         ) : Action()
 
         class UpdateFlags(
-            val flags: UByte
+            val shouldDarkenSky: Boolean,
+            val isDragonBar: Boolean,
+            var createFog: Boolean
         ) : Action()
 
     }

@@ -13,13 +13,9 @@ import xyz.ixidi.gravel.bot.event.PacketReceivedEvent
 import xyz.ixidi.gravel.core.Gravel
 import xyz.ixidi.gravel.protocol.packet.play.client.ClientAnimationPacket
 import xyz.ixidi.gravel.protocol.packet.play.client.ClientInteractEntityPacket
-import xyz.ixidi.gravel.protocol.packet.play.server.ServerSpawnEntityPacket
 import xyz.ixidi.gravel.protocol.Protocols
 import xyz.ixidi.gravel.protocol.misc.BlockFace
-import xyz.ixidi.gravel.protocol.misc.PositionData
 import xyz.ixidi.gravel.protocol.packet.play.client.ClientPlayerBlockPlacementPacket
-import xyz.ixidi.gravel.protocol.packet.play.server.ServerEntityPositionPacket
-import xyz.ixidi.gravel.protocol.packet.play.server.ServerEntityTeleportPacket
 import xyz.ixidi.gravel.protocol.packet.play.server.ServerOpenWindowsPacket
 import xyz.ixidi.gravel.v1_17_1.v1_17_1
 

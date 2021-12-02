@@ -2,7 +2,6 @@ package xyz.ixidi.gravel.protocol.packet.play.client
 
 import xyz.ixidi.gravel.api.packet.Packet
 import xyz.ixidi.gravel.protocol.misc.BlockFace
-import xyz.ixidi.gravel.protocol.misc.PositionData
 
 interface ClientPlayerBlockPlacementPacket : Packet {
 

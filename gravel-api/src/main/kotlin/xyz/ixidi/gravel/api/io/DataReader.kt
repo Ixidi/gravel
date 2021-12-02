@@ -21,6 +21,7 @@ interface DataReader {
     suspend fun readString(): String
     suspend fun readString(maxLength: Int): String
     suspend fun readTextComponent(maxJsonLength: Int): TextComponent
+    suspend fun readIdentifier(): Identifier
     suspend fun readVarInt(): Int
     suspend fun readVarLong(): Long
     // suspend fun readEntityMetadata() TODO MUCH work in transferring to OOP, later
